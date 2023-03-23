@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ToDoDetail\StoreRequest;
+use App\Http\Requests\ToDoDetail\UpdateRequest;
+use App\Models\ToDoDetail;
 use Illuminate\Http\Request;
 
 class ToDoDetailController extends Controller
@@ -32,9 +35,13 @@ class ToDoDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $toDoDetail = new ToDoDetail();
+        $toDoDetail->to_do_id = $request->get('to_do_id');
+        $toDoDetail->name = $request->get('name');
+        $toDoDetail->completed_flag = false;
+        $toDoDetail->save();
     }
 
     /**
@@ -66,9 +73,11 @@ class ToDoDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $toDoDetail = ToDoDetail::find($id);
+        $toDoDetail->name = $request->get('name');
+        $toDoDetail->save();
     }
 
     /**
@@ -79,6 +88,7 @@ class ToDoDetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $toDoDetail = ToDoDetail::find($id);
+        $toDoDetail->delete();
     }
 }
