@@ -13,4 +13,11 @@ class ToDo extends Model
     {
         return $this->hasMany(ToDoDetail::class);
     }
+
+    // 紐づくToDoDetailも一緒に削除するためにdeleteメソッドをオーバーライド
+    public function delete()
+    {
+        $this->toDoDetails()->delete();
+        parent::delete();
+    }
 }
