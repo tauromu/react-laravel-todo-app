@@ -1,11 +1,35 @@
-import { Card, CardContent, CardHeader, List } from "@mui/material";
-import React from "react";
+import { Card, CardContent, List, TextField } from "@mui/material";
+import React, { useState } from "react";
+import { useUpdateToDoMutateTask } from "../hooks/ToDo";
 import ToDoDetail from "./ToDoDetail";
 
 const ToDo = (props) => {
+    const [timer, setTimer] = useState(null);
+    let toDo = {
+        id: props.toDo.id,
+        title: props.toDo.title,
+    };
+    const { updateToDoMutation } = useUpdateToDoMutateTask();
+    const eventUpdateToDo = (event) => {
+        clearTimeout(timer);
+        const newTimer = setTimeout(() => {
+            let data = {
+                ...toDo,
+                title: event.target.value,
+            };
+            updateToDoMutation.mutate(data);
+        }, 500);
+        setTimer(newTimer);
+    };
     return (
         <Card>
-            <CardHeader title={props.toDo.title} />
+            <TextField
+                variant="standard"
+                margin="dense"
+                defaultValue={props.toDo.title}
+                fullWidth
+                onChange={eventUpdateToDo}
+            />
             <CardContent>
                 <List>
                     {props.toDo.to_do_details.map((detail) => {
