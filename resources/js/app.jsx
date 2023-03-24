@@ -6,15 +6,20 @@ import Example from "./pages/Example";
 import { Box } from "@mui/system";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const client = new QueryClient();
 
 const App = () => {
     return (
         <Box>
             <Navigation></Navigation>
             <Router>
-                <Routes>
-                    <Route path="/" exact Component={Home} />
-                </Routes>
+                <QueryClientProvider client={client}>
+                    <Routes>
+                        <Route path="/" exact Component={Home} />
+                    </Routes>
+                </QueryClientProvider>
             </Router>
         </Box>
     );
