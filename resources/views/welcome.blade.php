@@ -7,7 +7,7 @@
 
     <title>React-Laravel-Todo-App</title>
     @viteReactRefresh
-    @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.jsx'])
 </head>
 
 <body>
