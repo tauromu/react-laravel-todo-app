@@ -1,11 +1,17 @@
 import { Delete } from "@mui/icons-material";
-import { Checkbox, IconButton, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import {
+    Checkbox,
+    IconButton,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+} from "@mui/material";
 import React from "react";
 
 const ToDoDetail = (props) => {
     return (
         <ListItem
-            key={props.id}
+            key={props.detail.id}
             secondaryAction={
                 <IconButton edge="end" aria-label="delete">
                     <Delete />
@@ -15,9 +21,7 @@ const ToDoDetail = (props) => {
         >
             <ListItemButton>
                 <Checkbox edge="start" />
-                <ListItemText
-                    primary={`Test ToDoDetail ${props.id}`}
-                ></ListItemText>
+                <ListItemText primary={`${props.detail.name}`}></ListItemText>
             </ListItemButton>
         </ListItem>
     );

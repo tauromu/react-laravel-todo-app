@@ -16,7 +16,7 @@ class ToDoController extends Controller
      */
     public function index()
     {
-        $toDos = ToDo::get();
+        $toDos = ToDo::with('toDoDetails')->get();
         return $toDos;
     }
 
