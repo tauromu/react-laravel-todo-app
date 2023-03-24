@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Example from "./pages/Example";
 import { Box } from "@mui/system";
 import Navigation from "./components/Navigation";
+import Home from "./pages/Home";
 
 const App = () => {
     return (
@@ -12,7 +13,7 @@ const App = () => {
             <Navigation></Navigation>
             <Router>
                 <Routes>
-                    <Route path="/" exact Component={Example} />
+                    <Route path="/" exact Component={Home} />
                 </Routes>
             </Router>
         </Box>
