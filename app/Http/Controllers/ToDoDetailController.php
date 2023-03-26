@@ -77,6 +77,7 @@ class ToDoDetailController extends Controller
     {
         $toDoDetail = ToDoDetail::find($id);
         $toDoDetail->name = $request->get('name');
+        $toDoDetail->completed_flag = $request->get('completed_flag');
         $toDoDetail->save();
     }
 

@@ -16,6 +16,7 @@ const ToDoDetail = (props) => {
     let toDoDetail = {
         id: props.detail.id,
         name: props.detail.name,
+        completed_flag: props.detail.completed_flag == 1,
     };
 
     const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
@@ -32,6 +33,14 @@ const ToDoDetail = (props) => {
 
         setTimer(newTimer);
     };
+
+    const eventCheckToDoDetail = (event) => {
+        let data = {
+            ...toDoDetail,
+            completed_flag: event.target.checked,
+        };
+        updateToDoDetailMutation.mutate(data);
+    };
     return (
         <ListItem
             key={props.detail.id}
@@ -43,7 +52,11 @@ const ToDoDetail = (props) => {
             disablePadding
         >
             <ListItemButton>
-                <Checkbox edge="start" />
+                <Checkbox
+                    edge="start"
+                    defaultChecked={props.detail.completed_flag == 1}
+                    onChange={eventCheckToDoDetail}
+                />
                 <TextField
                     variant="standard"
                     margin="dense"

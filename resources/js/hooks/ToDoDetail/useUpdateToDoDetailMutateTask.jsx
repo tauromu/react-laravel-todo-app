@@ -5,6 +5,7 @@ const useUpdateToDoDetailMutateTask = () => {
     const updateToDoDetailMutation = useMutation((toDoDetail) =>
         axios.put("/api/todoDetails/" + toDoDetail.id, {
             name: toDoDetail.name,
+            completed_flag: toDoDetail.completed_flag,
         })
     );
     return { updateToDoDetailMutation };
