@@ -16,7 +16,8 @@ const ToDoDetail = (props) => {
     let toDoDetail = {
         id: props.detail.id,
         name: props.detail.name,
-        completed_flag: props.detail.completed_flag == 1,
+        completed_flag: props.detail.completed_flag,
+        to_do_id: props.detail.to_do_id,
     };
 
     const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
@@ -54,7 +55,7 @@ const ToDoDetail = (props) => {
             <ListItemButton>
                 <Checkbox
                     edge="start"
-                    defaultChecked={props.detail.completed_flag == 1}
+                    checked={props.detail.completed_flag}
                     onChange={eventCheckToDoDetail}
                 />
                 <TextField
