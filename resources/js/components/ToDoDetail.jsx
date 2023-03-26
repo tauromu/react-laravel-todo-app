@@ -8,7 +8,10 @@ import {
     TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useUpdateToDoDetailMutateTask } from "../hooks/ToDoDetail";
+import {
+    useDeleteToDoDetailMutateTask,
+    useUpdateToDoDetailMutateTask,
+} from "../hooks/ToDoDetail";
 
 const ToDoDetail = (props) => {
     const [timer, setTimer] = useState(null);
@@ -42,11 +45,21 @@ const ToDoDetail = (props) => {
         };
         updateToDoDetailMutation.mutate(data);
     };
+
+    const { deleteToDoDetailMutation } = useDeleteToDoDetailMutateTask();
+    const eventDeleteToDoDetail = (event) => {
+        deleteToDoDetailMutation.mutate(toDoDetail);
+    };
+
     return (
         <ListItem
             key={props.detail.id}
             secondaryAction={
-                <IconButton edge="end" aria-label="delete">
+                <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={eventDeleteToDoDetail}
+                >
                     <Delete />
                 </IconButton>
             }
