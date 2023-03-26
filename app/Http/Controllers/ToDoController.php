@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ToDo\StoreRequest;
 use App\Http\Requests\ToDo\UpdateRequest;
 use App\Models\ToDo;
+use App\Models\ToDoDetail;
 use Illuminate\Http\Request;
 
 class ToDoController extends Controller
@@ -40,7 +41,15 @@ class ToDoController extends Controller
     {
         $toDo = new ToDo();
         $toDo->title = $request->get('title');
-        $toDo->save();
+        $toDoDetail = new ToDoDetail();
+        $toDoDetail->name = null;
+        $toDoDetail->completed_flag = false;
+
+        // ToDo及びToDoDetailが共に更新できて初めて処理を実行する
+        DB::transaction(function () use ($toDo, $toDoDetail) {
+            $toDo->save();
+            $toDo->toDoDetails()->save($toDoDetail);
+        });
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Delete } from "@mui/icons-material";
+import { AddCircle, Delete } from "@mui/icons-material";
 import {
     Card,
     CardActions,
@@ -12,6 +12,7 @@ import {
     useDeleteToDoMutateTask,
     useUpdateToDoMutateTask,
 } from "../hooks/ToDo";
+import { useStoreToDoDetailMutateTask } from "../hooks/ToDoDetail";
 import ToDoDetail from "./ToDoDetail";
 
 const ToDo = (props) => {
@@ -35,7 +36,13 @@ const ToDo = (props) => {
 
     const { deleteToDoMutation } = useDeleteToDoMutateTask();
     const eventDeleteToDo = (event) => {
+        console.log(deleteToDoMutation);
         deleteToDoMutation.mutate(toDo);
+    };
+
+    const { storeToDoDetailMutation } = useStoreToDoDetailMutateTask();
+    const eventStoreToDoDetail = (event) => {
+        storeToDoDetailMutation.mutate(toDo);
     };
 
     return (
@@ -55,6 +62,14 @@ const ToDo = (props) => {
                 </List>
             </CardContent>
             <CardActions>
+                <IconButton
+                    edge="start"
+                    aria-label="add"
+                    color="primary"
+                    onClick={eventStoreToDoDetail}
+                >
+                    <AddCircle />
+                </IconButton>
                 <IconButton
                     edge="end"
                     aria-label="delete"

@@ -6,7 +6,6 @@ import { Box } from "@mui/system";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 const client = new QueryClient();
 
@@ -19,7 +18,6 @@ const App = () => {
                     <Routes>
                         <Route path="/" exact Component={Home} />
                     </Routes>
-                    <ReactQueryDevtools></ReactQueryDevtools>
                 </QueryClientProvider>
             </Router>
         </Box>
