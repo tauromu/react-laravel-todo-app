@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 const useUpdateToDoDetailMutateTask = () => {
+    const queryClient = useQueryClient();
     const updateToDoDetailMutation = useMutation(
         (toDoDetail) =>
             axios.put("/api/todoDetails/" + toDoDetail.id, {
