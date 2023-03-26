@@ -5,10 +5,33 @@ import {
     ListItem,
     ListItemButton,
     ListItemText,
+    TextField,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useUpdateToDoDetailMutateTask } from "../hooks/ToDoDetail";
 
 const ToDoDetail = (props) => {
+    const [timer, setTimer] = useState(null);
+
+    let toDoDetail = {
+        id: props.detail.id,
+        name: props.detail.name,
+    };
+
+    const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
+    const eventUpdateToDoDetail = (event) => {
+        clearTimeout(timer);
+
+        const newTimer = setTimeout(() => {
+            let data = {
+                ...toDoDetail,
+                name: event.target.value,
+            };
+            updateToDoDetailMutation.mutate(data);
+        }, 500);
+
+        setTimer(newTimer);
+    };
     return (
         <ListItem
             key={props.detail.id}
@@ -21,7 +44,13 @@ const ToDoDetail = (props) => {
         >
             <ListItemButton>
                 <Checkbox edge="start" />
-                <ListItemText primary={`${props.detail.name}`}></ListItemText>
+                <TextField
+                    variant="standard"
+                    margin="dense"
+                    defaultValue={props.detail.name}
+                    fullWidth
+                    onChange={eventUpdateToDoDetail}
+                />
             </ListItemButton>
         </ListItem>
     );
